@@ -31,7 +31,7 @@ jupyter labextension install @pyviz/jupyterlab_pyviz
 jupyter serverextension enable --py nbgitpuller --sys-prefix
 
 # Jupyter Hub - for cluster
-pip install jupyterhub
+pip install jupyterhub==0.9.6
 
 # Add funny font
 mkdir ~/.fonts
