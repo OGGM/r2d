@@ -30,6 +30,9 @@ jupyter labextension install jupyterlab_bokeh
 jupyter labextension install @pyviz/jupyterlab_pyviz
 jupyter serverextension enable --py nbgitpuller --sys-prefix
 
+# Jupyter Hub - for cluster
+pip install jupyterhub
+
 # Add funny font
 mkdir ~/.fonts
 wget http://antiyawn.com/uploads/Humor-Sans-1.0.ttf
