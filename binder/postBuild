@@ -4,12 +4,16 @@
 pip install gdal=="$(gdal-config --version)" --install-option="build_ext" --install-option="$(gdal-config --cflags | sed 's/-I/--include-dirs=/')"
 pip install fiona --install-option="build_ext" --install-option="$(gdal-config --cflags | sed 's/-I/--include-dirs=/')"
 pip install pyproj
+pip install cython
+pip install cartopy
 pip install geopandas
 pip install rasterio
 pip install pyviz_comms
 pip install bokeh
 pip install param
 pip install holoviews
+pip install hvplot
+pip install geoviews
 pip install pyct
 pip install panel
 pip install parambokeh
