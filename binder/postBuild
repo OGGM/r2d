@@ -1,37 +1,14 @@
 #!/bin/bash
 
-# Add packages
-pip install gdal=="$(gdal-config --version)" --install-option="build_ext" --install-option="$(gdal-config --cflags | sed 's/-I/--include-dirs=/')"
-pip install fiona --install-option="build_ext" --install-option="$(gdal-config --cflags | sed 's/-I/--include-dirs=/')"
-pip install pyproj
-pip install geopandas
-pip install rasterio
-pip install pyviz_comms
-pip install bokeh
-pip install param
-pip install holoviews
-pip install pyct
-pip install panel
-pip install parambokeh
-pip install datashader
-pip install descartes
-pip install seaborn
-pip install git+https://github.com/fmaussion/salem.git
-pip install git+https://github.com/OGGM/oggm.git
-pip install git+https://github.com/OGGM/oggm-edu.git
-pip install git+https://github.com/retostauffer/python-colorspace
+# serverextensions
+jupyter serverextension enable --sys-prefix --py nbserverproxy
 
 # Jupyterlab
-pip install jupyterlab==0.35.4
-pip install ipympl
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
 jupyter labextension install jupyter-matplotlib
 jupyter labextension install jupyterlab_bokeh
 jupyter labextension install @pyviz/jupyterlab_pyviz
 jupyter serverextension enable --py nbgitpuller --sys-prefix
-
-# Jupyter Hub - for cluster
-pip install jupyterhub==0.9.6
 
 # Add funny font
 mkdir ~/.fonts
