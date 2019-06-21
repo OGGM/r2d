@@ -6,6 +6,10 @@ python:
 services:
   - docker
 
+branches:
+  only:
+    - master
+
 env:
   global:
     - DOCKER_IMAGE=oggm/oggm-edu-r2d
