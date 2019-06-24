@@ -22,7 +22,8 @@ install:
   - pip3 install --upgrade jupyter-repo2docker
 
 script:
-  - jupyter-repo2docker --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" .
+- docker pull "${DOCKER_IMAGE}:latest" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:latest'" || CACHE_LINE=""
+- jupyter-repo2docker --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest"
 
 after_success:
   - DATE_ID="$(date +%Y%m%d)"
