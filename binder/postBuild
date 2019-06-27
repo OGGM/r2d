@@ -39,7 +39,7 @@ echo "has_internet = True" >> .oggm_config
 if [ -d "/oggm_commons" ]
 then
     # On repo2docker
-    python /oggm_commonsbinder/download_cache.py
+    python /oggm_commons/binder/download_cache.py
     mv .fonts .oggm .oggm_cache .oggm_config .salem_cache /oggm_commons/
     ln -s /oggm_commons/* .
 else
