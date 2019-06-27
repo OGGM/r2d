@@ -2,13 +2,14 @@
 
 # serverextensions
 jupyter serverextension enable --sys-prefix --py nbserverproxy
+jupyter serverextension enable --sys-prefix --py nbgitpuller
+
 
 # Jupyterlab
-jupyter labextension install @jupyter-widgets/jupyterlab-manager
-jupyter labextension install jupyter-matplotlib
-jupyter labextension install jupyterlab_bokeh
-jupyter labextension install @pyviz/jupyterlab_pyviz
-jupyter serverextension enable --py nbgitpuller --sys-prefix
+jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+                             jupyter-matplotlib \
+                             jupyterlab_bokeh \
+                             @pyviz/jupyterlab_pyviz
 
 # Add funny font
 mkdir ~/.fonts
