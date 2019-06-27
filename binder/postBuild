@@ -38,3 +38,8 @@ echo "has_internet = True" >> .oggm_config
 
 # Get the OGGM data
 python binder/download_cache.py
+
+# Make a folder that we will then link
+mkdir /oggm_commons
+mv .fonts .oggm .oggm_cache .oggm_config .salem_cache /oggm_commons/
+ln -s /oggm_commons/* .
