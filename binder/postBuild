@@ -36,5 +36,13 @@ echo "rgi_dir = $HOME/.oggm_cache/rgi" >> .oggm_config
 echo "test_dir = $HOME/.oggm_cache/OGGM_tests" >> .oggm_config
 echo "has_internet = True" >> .oggm_config
 
-# Get the OGGM data
-python binder/download_cache.py
+if [ -d "/oggm_commons" ]
+then
+    # On repo2docker
+    python /oggm_commons/binder/download_cache.py
+    mv .fonts .oggm .oggm_cache .oggm_config .salem_cache /oggm_commons/
+    ln -s /oggm_commons/* .
+else
+    # On mybinder
+    python binder/download_cache.py
+fi
