@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Add funny font
-if [ ! -f ".fonts" ]
+if [ ! -d ".fonts" ]
 then
   mkdir ~/.fonts
   wget http://antiyawn.com/uploads/Humor-Sans-1.0.ttf
