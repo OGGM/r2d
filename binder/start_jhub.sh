@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Add funny font
+if [ ! -d ".fonts" ]
+then
+  mkdir ~/.fonts
+  wget http://antiyawn.com/uploads/Humor-Sans-1.0.ttf
+  mv Humor-Sans-1.0.ttf ~/.fonts/Humor-Sans-1.0.ttf
+  cd ~/.fonts/
+  fc-cache -f -v
+fi
+
+# Back to home
+cd ~
+
+# run matplotlib once to generate the font cache
+python -c "import matplotlib as mpl; mpl.use('Agg'); import pylab as plt; fig, ax = plt.subplots(); fig.savefig('test.png')"
+test -e test.png && rm test.png
+
 # Set up OGGM paths
 mkdir -p .oggm_cache
 if [ ! -f ".oggm_config" ]
