@@ -14,7 +14,7 @@ dependencies:
   - scipy
   - pandas
   - shapely
-  - matplotlib
+  - matplotlib<3.0.0
   - Pillow
   - netcdf4
   - scikit-image
