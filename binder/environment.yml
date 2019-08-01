@@ -50,3 +50,4 @@ dependencies:
     - git+https://github.com/OGGM/oggm.git
     - git+https://github.com/OGGM/oggm-edu.git
     - git+https://github.com/retostauffer/python-colorspace
+    - git+https://github.com/OGGM/pytest-mpl
