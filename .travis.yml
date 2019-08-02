@@ -12,7 +12,7 @@ branches:
 
 env:
   global:
-    - DOCKER_IMAGE=oggm/r2d
+    - DOCKER_IMAGE=oggm/oggm-edu-r2d
     - DOCKERHUB_USER=oggmci
     - secure: BWZOpbNYGR/6I+X3FyiPim+L6Z47k725tSC6GKIsM5KppN81zT1wzJwAMkg+KVT6Z3ljsv1NH6ib1H2tLZYXpb/KbTLomAB0lqRXXSJr+nXSRG6Xs6MLfv9jPKrVwH1t2EqCzZ095Hs1hs3Dxc0+NsFUi/SzGtMNkBASXgEpvoGoKyckptThGrmXjDQ8dLLIe8lhOIL7I+grrwAk2Fe7mToaxYCHMQTCpkCqZN9W/5xTCl4LN67Dexg5ZXcZDZ5Zh+10Cl44a59UoBWf4+Yrf6fXCLAgyuMaA1/6n+RA463Sb1qdOqbmyrr3CHHVkkSunscu3KUooErDaJDy9S8/HPvmL+Jz1EnYWZFOeHHxJrzWtsaw4+HrymTIIpGgauS4qjmgUS1IF2FsJA6DKdq3REWzIH/B16bM8FPD+Yq+apaLPA0bSf/aT95T6NkpcbKbvkgCfpgcIS+FK8RytbeTvSjTFCmTSOHxWQqM5UXFO4MXJNyrE8UzK2DKHfzSkZEq+K/ZCllypr8I9+vwp8qmdu7YmyawMt5ZzCyKWxv55t+q+/8tYvdLH0hhbaMnYbZoCrYIRobzcy0aRNOesYO24PRnmYjc+KhguGdtkf8KU8byUpzQJhpB9beoLyExJs6/nRSXti//3ps1Ewk1+eYeDua09ubKNKjJF5qlyOR3zik=
 
