@@ -45,7 +45,7 @@ dependencies:
     - joblib
     - progressbar2
     - motionless
-    - nbgitpuller=0.6.1
+    - nbgitpuller==0.6.1
     - git+https://github.com/fmaussion/salem.git
     - git+https://github.com/OGGM/oggm.git
     - git+https://github.com/OGGM/oggm-edu.git
