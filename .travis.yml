@@ -26,9 +26,11 @@ script:
   - jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
   - docker run --rm "${DOCKER_IMAGE}:latest" pytest --mpl --pyargs salem || exit -1
   - docker run --rm "${DOCKER_IMAGE}:latest" pytest --mpl --pyargs oggm || exit -1
+  - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs rgitools || exit -1
 
 after_success:
   - DATE_ID="$(date +%Y%m%dT%H%M)"
   - docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${DATE_ID}"
   - docker push "${DOCKER_IMAGE}:${DATE_ID}"
   - docker push "${DOCKER_IMAGE}:latest"
+
