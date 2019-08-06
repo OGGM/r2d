@@ -23,7 +23,7 @@ install:
 
 script:
 - docker pull "${DOCKER_IMAGE}:latest" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:latest'" || CACHE_LINE=""
-- jupyter-repo2docker --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" .
+- jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
 
 after_success:
   - DATE_ID="$(date +%Y%m%dT%H%M)"
