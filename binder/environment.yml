@@ -10,7 +10,7 @@ dependencies:
   - nbserverproxy
   - ipywidgets
   - graphviz
-  - numpy
+  - numpy<1.17
   - scipy
   - pandas
   - shapely
