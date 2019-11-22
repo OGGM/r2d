@@ -2,7 +2,7 @@ name: oggm
 channels:
   - conda-forge
 dependencies:
-  - python=3.6
+  - python=3.7
   - jupyter
   - jupyterlab
   - jupyterhub
@@ -14,7 +14,7 @@ dependencies:
   - scipy
   - pandas
   - shapely
-  - matplotlib=3.0.3
+  - matplotlib
   - Pillow
   - netcdf4
   - scikit-image
