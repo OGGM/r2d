@@ -12,7 +12,7 @@ dependencies:
   - graphviz
   - numpy<1.17
   - scipy
-  - pandas
+  - pandas<1
   - shapely
   - matplotlib
   - Pillow
