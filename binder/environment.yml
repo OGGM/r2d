@@ -26,7 +26,7 @@ dependencies:
   - bottleneck
   - pyproj<2.3
   - cartopy
-  - geopandas
+  - geopandas<0.7.0
   - rasterio
   - pyviz_comms
   - bokeh
