@@ -12,7 +12,7 @@ dependencies:
   - graphviz
   - numpy<1.17
   - scipy
-  - pandas
+  - pandas<1
   - shapely
   - matplotlib
   - Pillow
@@ -24,9 +24,9 @@ dependencies:
   - pytest
   - dask
   - bottleneck
-  - pyproj
+  - pyproj<2.3
   - cartopy
-  - geopandas
+  - geopandas<0.7.0
   - rasterio
   - pyviz_comms
   - bokeh
