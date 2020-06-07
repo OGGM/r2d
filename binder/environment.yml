@@ -10,9 +10,9 @@ dependencies:
   - nbserverproxy
   - ipywidgets
   - graphviz
-  - numpy<1.17
+  - numpy
   - scipy
-  - pandas<1
+  - pandas
   - shapely
   - matplotlib
   - Pillow
