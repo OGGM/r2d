@@ -23,7 +23,7 @@ install:
 
 script:
   - docker pull "${DOCKER_IMAGE}:latest" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:latest'" || CACHE_LINE=""
-  - jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
+  - travis_wait 45 jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
   - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs salem || exit -1
   - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs oggm || exit -1
   - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs rgitools || exit -1
