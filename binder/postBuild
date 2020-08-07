@@ -41,3 +41,7 @@ echo "has_internet = True" >> .oggm_config
 
 # Pre-download oggm and salem sample-data
 python binder/download_cache.py
+
+# Make things pretty for users
+cp binder/README_hub.md README.mb
+rm -rf binder .travis.yml
