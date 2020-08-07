@@ -43,5 +43,5 @@ echo "has_internet = True" >> .oggm_config
 python binder/download_cache.py
 
 # Make things pretty for users
-cp binder/README_hub.md README.mb
+cp binder/README_hub.md README.md
 rm -rf binder .travis.yml
