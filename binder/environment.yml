@@ -47,8 +47,8 @@ dependencies:
     - progressbar2
     - motionless
     - nbgitpuller
-    - salem
-    - oggm
+    - salem==0.3.3
+    - oggm==1.4.0
     - git+https://github.com/OGGM/oggm-edu.git
     - git+https://github.com/GLIMS-RGI/rgitools
     - git+https://github.com/retostauffer/python-colorspace
