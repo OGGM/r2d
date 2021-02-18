@@ -23,14 +23,12 @@ install:
   - pip3 install --upgrade jupyter-repo2docker
 
 script:
-  - docker pull "${DOCKER_IMAGE}:latest" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:latest'" || CACHE_LINE=""
-  - jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
-  - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs salem || exit -1
-  - docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs oggm || exit -1
+  - docker pull "${DOCKER_IMAGE}:stable" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:stable'" || CACHE_LINE=""
+  - jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:stable" . || exit -1
+  - docker run --rm "${DOCKER_IMAGE}:stable" pytest --pyargs salem || exit -1
+  - docker run --rm "${DOCKER_IMAGE}:stable" pytest --pyargs oggm || exit -1
 
 after_success:
-  - DATE_ID="$(date +%Y%m%dT%H%M)"
-  - docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${DATE_ID}"
-  - docker push "${DOCKER_IMAGE}:${DATE_ID}"
-  - docker push "${DOCKER_IMAGE}:latest"
+  - docker tag "${DOCKER_IMAGE}:stable"
+  - docker push "${DOCKER_IMAGE}:stable"
 
