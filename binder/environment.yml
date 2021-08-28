@@ -51,6 +51,6 @@ dependencies:
     - git+https://github.com/OGGM/oggm.git
     - git+https://github.com/OGGM/oggm-edu.git
     - git+https://github.com/GLIMS-RGI/rgitools
-    - git+https://github.com/retostauffer/python-colorspace
+    - git+https://github.com/retostauffer/python-colorspace@da56c170fbaa8a6ca27f9483954ac3e2f51af617
     - git+https://github.com/OGGM/pytest-mpl
 
