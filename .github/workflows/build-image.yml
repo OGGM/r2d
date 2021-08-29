@@ -1,10 +1,6 @@
 name: Build Docker-Image
 
-on:
-  push:
-    branches:
-      - master
-      - stable
+on: push
 
 jobs:
   build-docker-image:
@@ -20,17 +16,23 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
+    - name: Get Image Tag
+      id: tag_name
+      run: |
+        BN="${GITHUB_REF#refs/*/}"
+        [[ "$BN" == "master" ]] && BN="latest"
+        echo "::set-output name=name::${BN}"
     - name: Install Dependencies
       run: |
         pip3 install --upgrade pip setuptools wheel && pip3 install --upgrade jupyter-repo2docker
     - name: Build r2d Image
       run: |
-        docker pull "${DOCKER_IMAGE}:latest" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:latest'" || CACHE_LINE=""
-        jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:latest" . || exit -1
+        docker pull "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}'" || CACHE_LINE=""
+        jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
     - name: Test r2d Image
       run: |
-        docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs salem || exit -1
-        docker run --rm "${DOCKER_IMAGE}:latest" pytest --pyargs oggm || exit -1
+        docker run --rm "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
+        docker run --rm "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs oggm || exit -1
     - name: Login to Dockerhub
       uses: docker/login-action@v1
       with:
@@ -39,6 +41,10 @@ jobs:
     - name: Push Image
       run: |
         DATE_ID="$(date +%Y%m%dT%H%M)"
-        docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${DATE_ID}"
-        docker push "${DOCKER_IMAGE}:${DATE_ID}"
-        docker push "${DOCKER_IMAGE}:latest"
+        docker tag "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" "${DOCKER_IMAGE}:${DATE_ID}"
+        if [[ "${{ steps.tag_name.outputs.name }}" == "latest" ]]; then
+          docker push "${DOCKER_IMAGE}:${DATE_ID}"
+        else
+          docker push "${DOCKER_IMAGE}:${DATE_ID}-${{ steps.tag_name.outputs.name }}"
+        fi
+        docker push "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}"
