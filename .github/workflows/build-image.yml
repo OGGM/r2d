@@ -41,10 +41,7 @@ jobs:
     - name: Push Image
       run: |
         DATE_ID="$(date +%Y%m%dT%H%M)"
+        [[ "${{ steps.tag_name.outputs.name }}" == "latest" ]] && DATE_ID="${DATE_ID}-${{ steps.tag_name.outputs.name }}"
         docker tag "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" "${DOCKER_IMAGE}:${DATE_ID}"
-        if [[ "${{ steps.tag_name.outputs.name }}" == "latest" ]]; then
-          docker push "${DOCKER_IMAGE}:${DATE_ID}"
-        else
-          docker push "${DOCKER_IMAGE}:${DATE_ID}-${{ steps.tag_name.outputs.name }}"
-        fi
+        docker push "${DOCKER_IMAGE}:${DATE_ID}"
         docker push "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}"
