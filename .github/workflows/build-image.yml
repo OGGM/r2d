@@ -27,6 +27,7 @@ jobs:
         pip3 install --upgrade pip setuptools wheel && pip3 install --upgrade jupyter-repo2docker
     - name: Build r2d Image
       run: |
+        rm -rf .git .github
         docker pull "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}'" || CACHE_LINE=""
         jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
     - name: Test r2d Image

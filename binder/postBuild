@@ -44,4 +44,4 @@ python binder/download_cache.py
 
 # Make things pretty for users
 cp binder/README_hub.md README.md
-rm -rf binder .travis.yml .git
+rm -rf binder
