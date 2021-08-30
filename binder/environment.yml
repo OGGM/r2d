@@ -47,8 +47,8 @@ dependencies:
     - progressbar2
     - motionless
     - nbgitpuller
-    - git+https://github.com/fmaussion/salem.git
-    - git+https://github.com/OGGM/oggm.git
+    - salem==0.3.5
+    - oggm==1.5.2
     - git+https://github.com/OGGM/oggm-edu.git
     - git+https://github.com/GLIMS-RGI/rgitools
     - git+https://github.com/OGGM/pytest-mpl
