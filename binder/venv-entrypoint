@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+if [[ $# == 0 ]]; then
+    echo "Missing secondary entrypoint"
+    exit 1
+fi
+
+PYVER_TAG="$(python3 -c 'import site; sp=[s for s in site.getsitepackages() if s.endswith("site-packages") and "'"$(pyenv prefix)"'" in s]; print(sp[0].split("/")[-2])')"
+VENV_LOC="$HOME/.r2d_venvs/$PYVER_TAG"
+
+if ! [[ -d "$VENV_LOC" ]]; then
+    rm -rf "$VENV_LOC"
+    mkdir -p "$HOME/.r2d_venvs"
+    python3 -m venv --system-site-packages "$VENV_LOC"
+fi
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+source "$VENV_LOC"/bin/activate
+unset VIRTUAL_ENV_DISABLE_PROMPT
+
+exec "$@"
