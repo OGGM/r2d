@@ -24,7 +24,7 @@ jobs:
         echo "::set-output name=name::${BN}"
     - name: Install Dependencies
       run: |
-        pip3 install --upgrade pip setuptools wheel && pip3 install --upgrade jupyter-repo2docker
+        pip3 install --upgrade pip setuptools wheel && pip3 install --upgrade git+https://github.com/jupyterhub/repo2docker.git
     - name: Build r2d Image
       run: |
         rm -rf .git .github
@@ -32,8 +32,8 @@ jobs:
         jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
     - name: Test r2d Image
       run: |
-        docker run --rm "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
-        docker run --rm "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs oggm || exit -1
+        docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
+        docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs oggm || exit -1
     - name: Login to Dockerhub
       uses: docker/login-action@v1
       with:
