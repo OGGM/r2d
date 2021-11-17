@@ -7,7 +7,7 @@ jobs:
     name: Build Docker Image
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: oggm/r2d
+      DOCKER_IMAGE: ghcr.io/oggm/r2d
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -37,8 +37,9 @@ jobs:
     - name: Login to Dockerhub
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKERHUB_USER }}
-        password: ${{ secrets.DOCKERHUB_PASS }}
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
     - name: Push Image
       run: |
         DATE_ID="$(date +%Y%m%dT%H%M)"
