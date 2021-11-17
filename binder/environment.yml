@@ -41,11 +41,11 @@ dependencies:
   - seaborn
   - ipympl
   - pytables
+  - motionless
   - pip
   - pip:
     - joblib
     - progressbar2
-    - motionless
     - nbgitpuller
     - git+https://github.com/fmaussion/salem.git
     - git+https://github.com/OGGM/oggm.git
