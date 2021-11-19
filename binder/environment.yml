@@ -24,8 +24,8 @@ dependencies:
   - pytest
   - dask
   - bottleneck
-  - pyproj>=3.3
-  - proj>=8.2
+  - pyproj=3.2.*
+  - proj=8.1.*
   - cartopy
   - geopandas
   - rasterio
