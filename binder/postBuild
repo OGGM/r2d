@@ -14,11 +14,7 @@ jupyter labextension install @jupyterlab/hub-extension
 
 jupyter lab build
 
-# Add funny font
-mkdir ~/.fonts
-wget https://antiyawn.com/uploads/Humor-Sans-1.0.ttf
-mv Humor-Sans-1.0.ttf ~/.fonts/Humor-Sans-1.0.ttf
-cd ~/.fonts/
+# Update fonts
 fc-cache -f -v
 
 # Back to home
