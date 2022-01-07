@@ -94,6 +94,8 @@ RUN mkdir -p /usr/local/bin && \
     wget https://raw.githubusercontent.com/jupyterhub/repo2docker/main/repo2docker/buildpacks/repo2docker-entrypoint -O /usr/local/bin/repo2docker-entrypoint && \
     chmod +x /usr/local/bin/{python3-login,repo2docker-entrypoint}
 
+COPY binder/Humor-Sans-1.0.ttf /usr/share/fonts/Humor-Sans-1.0.ttf
+
 USER ${NB_USER}
 WORKDIR ${REPO_DIR}
 
