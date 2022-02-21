@@ -27,6 +27,9 @@ RUN ${PIP} install --no-cache-dir \
 # OGGM(-Hub) requirements
 RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         pyct && \
+    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
+        scikit-learn \
+        ipympl && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         nbgitpuller \
         nbserverproxy \
@@ -34,11 +37,9 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         bokeh \
         param \
         shapely \
-        scikit-learn \
         pyviz_comms \
         parambokeh \
         seaborn \
-        ipympl \
         tables \
         git+https://github.com/OGGM/oggm-edu.git \
         git+https://github.com/GLIMS-RGI/rgitools.git
