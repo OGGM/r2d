@@ -87,7 +87,6 @@ RUN groupadd --gid ${NB_UID} ${NB_USER} && \
 
 COPY --chown=${NB_USER}:${NB_USER} --from=builder /usr/local/pyenv /usr/local/pyenv
 
-COPY binder/venv-entrypoint /usr/local/bin/venv-entrypoint
 COPY --chown=${NB_USER}:${NB_USER} binder/ /home/${NB_USER}/binder
 
 RUN mkdir -p /usr/local/bin && \
@@ -102,5 +101,5 @@ WORKDIR ${REPO_DIR}
 
 RUN bash /home/${NB_USER}/binder/postBuild
 
-ENTRYPOINT ["/usr/local/bin/venv-entrypoint", "/usr/local/bin/repo2docker-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/repo2docker-entrypoint"]
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
