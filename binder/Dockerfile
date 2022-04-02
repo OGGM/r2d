@@ -1,4 +1,4 @@
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=4d1e684b5cb6af042f11e236078a397252343ead
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -56,10 +56,10 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         panel \
         datashader
 
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=4d1e684b5cb6af042f11e236078a397252343ead
 FROM ghcr.io/oggm/oggm:${OGGM_TAG}
 
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=4d1e684b5cb6af042f11e236078a397252343ead
 ARG MEM_LIMIT=2G
 ARG CPU_LIMIT=2
 
