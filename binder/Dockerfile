@@ -45,8 +45,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         metpy \
         xarray==0.18.2 \
         git+https://github.com/OGGM/oggm-edu.git \
-        git+https://github.com/GLIMS-RGI/rgitools.git \
-        git+https://github.com/cryotools/cosipy
+        git+https://github.com/GLIMS-RGI/rgitools.git
 
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
