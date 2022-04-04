@@ -57,7 +57,7 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         datashader
 
 ARG EXTRA_PACKAGES=-
-RUN [ "${EXTRA_PACKAGES}" != "-" ] && \
+RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
 
 ARG OGGM_TAG=latest
