@@ -41,8 +41,12 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         parambokeh \
         seaborn \
         tables \
+        dask_jobqueue \
+        metpy \
+        xarray<=0.18.2 \
         git+https://github.com/OGGM/oggm-edu.git \
-        git+https://github.com/GLIMS-RGI/rgitools.git
+        git+https://github.com/GLIMS-RGI/rgitools.git \
+        git+https://github.com/cryotools/cosipy
 
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
