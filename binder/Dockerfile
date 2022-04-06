@@ -43,13 +43,14 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         tables \
         dask_jobqueue \
         metpy \
-        xarray==0.18.2 \
         git+https://github.com/OGGM/oggm-edu.git \
         git+https://github.com/GLIMS-RGI/rgitools.git
 
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
+    ${PIP} install --no-cache-dir --force-reinstall \
+        xarray==0.18.2 && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         tqdm && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
@@ -58,6 +59,8 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         geoviews \
         panel \
         datashader
+        
+   
 
 ARG OGGM_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG}
