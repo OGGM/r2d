@@ -50,6 +50,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
     ${PIP} install --no-cache-dir --force-reinstall \
+        numpy<1.22 \
         xarray==0.18.2 && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         tqdm && \
