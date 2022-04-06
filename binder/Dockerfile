@@ -49,9 +49,6 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
-    ${PIP} install --no-cache-dir --force-reinstall \
-        numpy<1.22 \
-        xarray==0.18.2 && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         tqdm && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
@@ -60,8 +57,8 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         geoviews \
         panel \
         datashader
-        
-   
+
+
 
 ARG OGGM_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG}
@@ -107,6 +104,8 @@ COPY binder/Humor-Sans-1.0.ttf /usr/share/fonts/Humor-Sans-1.0.ttf
 
 USER ${NB_USER}
 WORKDIR ${REPO_DIR}
+
+RUN ${PIP} install --no-cache-dir xarray==0.18.2
 
 RUN bash /home/${NB_USER}/binder/postBuild
 
