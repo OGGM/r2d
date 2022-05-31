@@ -1,4 +1,5 @@
 ARG OGGM_TAG=latest
+ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -60,10 +61,10 @@ ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
 
-ARG OGGM_TAG=latest
-FROM ghcr.io/oggm/oggm:${OGGM_TAG}
+ARG BASE_TAG=latest
+FROM ghcr.io/oggm/empty_base:${BASE_TAG}
 
-ARG OGGM_TAG=latest
+ARG BASE_TAG=latest
 ARG MEM_LIMIT=2G
 ARG CPU_LIMIT=2
 
@@ -89,6 +90,7 @@ RUN groupadd --gid ${NB_UID} ${NB_USER} && \
         --uid ${NB_UID} \
         ${NB_USER}
 
+COPY --from=builder /opt/proj /opt/proj
 COPY --chown=${NB_USER}:${NB_USER} --from=builder /usr/local/pyenv /usr/local/pyenv
 
 COPY --chown=${NB_USER}:${NB_USER} binder/ /home/${NB_USER}/binder
@@ -96,7 +98,8 @@ COPY --chown=${NB_USER}:${NB_USER} binder/ /home/${NB_USER}/binder
 RUN mkdir -p /usr/local/bin && \
     wget https://raw.githubusercontent.com/jupyterhub/repo2docker/main/repo2docker/buildpacks/python3-login -O /usr/local/bin/python3-login && \
     wget https://raw.githubusercontent.com/jupyterhub/repo2docker/main/repo2docker/buildpacks/repo2docker-entrypoint -O /usr/local/bin/repo2docker-entrypoint && \
-    chmod +x /usr/local/bin/{python3-login,repo2docker-entrypoint}
+    chmod +x /usr/local/bin/{python3-login,repo2docker-entrypoint} && \
+    ldconfig
 
 RUN cp /usr/local/pyenv/versions/*/lib/*/site-packages/nbgitpuller/templates/status.html /usr/local/pyenv/versions/*/lib/*/site-packages/notebook/templates/
 
@@ -105,7 +108,10 @@ COPY binder/Humor-Sans-1.0.ttf /usr/share/fonts/Humor-Sans-1.0.ttf
 USER ${NB_USER}
 WORKDIR ${REPO_DIR}
 
-RUN bash /home/${NB_USER}/binder/postBuild
+RUN pyenv rehash && \
+    ${PIP} check && \
+    python3 -c "import fiona, matplotlib.font_manager, salem" && \
+    bash /home/${NB_USER}/binder/postBuild
 
 ENTRYPOINT ["/usr/local/bin/repo2docker-entrypoint"]
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
