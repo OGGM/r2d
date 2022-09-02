@@ -14,6 +14,10 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     npm install --global yarn && \
     ln -s bash /bin/sh.bash && mv /bin/sh.bash /bin/sh
 
+# Temporary workaround, since it requires tornado>=6.2 now, colliding with distributed wanting <6.2.
+# Remove once distributed supports up-to-date tornado
+RUN ${PIP} install --no-cache-dir "jupyter-client<7.3.5"
+
 # repo2docker requirements
 RUN ${PIP} install --no-cache-dir \
         ipywidgets \
