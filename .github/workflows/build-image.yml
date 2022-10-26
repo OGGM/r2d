@@ -26,7 +26,7 @@ jobs:
       run: |
         BN="${GITHUB_REF#refs/*/}"
         [[ "$BN" == "master" ]] && BN="latest"
-        echo "::set-output name=name::${BN}"
+        echo "name=${BN}" >> $GITHUB_OUTPUT
     - name: Install Dependencies
       run: |
         pip3 install --upgrade pip setuptools wheel && pip3 install --upgrade git+https://github.com/jupyterhub/repo2docker.git
