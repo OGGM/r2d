@@ -61,6 +61,13 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         geoviews \
         datashader
 
+# Lab extensions
+RUN ${PIP} install --no-cache-dir --no-binary :all: \
+        jupyter-server-proxy \
+        nbgitpuller \
+        jupyterlab-widgets \
+        dask-labextension
+
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
