@@ -54,7 +54,7 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         tqdm && \
-    ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
+    ${PIP} install --no-cache-dir --no-binary :all: \
         holoviews \
         hvplot \
         geoviews \
