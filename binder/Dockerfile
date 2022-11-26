@@ -62,7 +62,7 @@ RUN ${PIP} install --no-cache-dir --force-reinstall \
         datashader
 
 # Lab extensions
-RUN ${PIP} install --no-cache-dir --no-binary :all: \
+RUN ${PIP} install --no-cache-dir \
         jupyter-server-proxy \
         nbgitpuller \
         jupyterlab-widgets \
