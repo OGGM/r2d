@@ -53,12 +53,12 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
     ${PIP} install --no-cache-dir --no-binary :all: \
-        tqdm && \
-    ${PIP} install --no-cache-dir --no-binary :all: \
+        tqdm \
+        panel && \
+    ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         holoviews \
         hvplot \
         geoviews \
-        panel \
         datashader
 
 ARG EXTRA_PACKAGES=-
