@@ -47,7 +47,8 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         seaborn \
         tables \
         git+https://github.com/OGGM/oggm-edu.git \
-        git+https://github.com/GLIMS-RGI/rgitools.git
+        git+https://github.com/GLIMS-RGI/rgitools.git \
+        oggm==v1.5.3
 
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
