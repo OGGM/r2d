@@ -6,6 +6,19 @@ on:
       - master
   schedule:
     - cron: '0 4 * * 6'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag Name'
+        required: true
+        default: 'latest'
+        type: string
+      extra_pkgs:
+        description: 'Extra pip packages'
+        required: true
+        default: '-'
+        type: string
+
 
 jobs:
   build-docker-image:
@@ -25,7 +38,9 @@ jobs:
       id: tag_name
       run: |
         BN="${GITHUB_REF#refs/*/}"
+        TN="${{ github.event.inputs.tag_name }}"
         [[ "$BN" == "master" ]] && BN="latest"
+        [[ -n "$TN" ]] && BN="$TN"
         echo "name=${BN}" >> $GITHUB_OUTPUT
     - name: Install Dependencies
       run: |
@@ -33,8 +48,10 @@ jobs:
     - name: Build r2d Image
       run: |
         rm -rf .git .github
+        EP="${{ github.event.inputs.extra_pkgs }}"
+        [[ -n "$EP" ]] && EP="--build-arg 'EXTRA_PACKAGES=$EP'"
         docker pull "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}'" || CACHE_LINE=""
-        jupyter-repo2docker $CACHE_LINE --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
+        jupyter-repo2docker $CACHE_LINE $EP --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
     - name: Test r2d Image
       run: |
         docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
@@ -47,8 +64,10 @@ jobs:
         password: ${{ github.token }}
     - name: Push Image
       run: |
-        DATE_ID="$(date +%Y%m%dT%H%M)"
-        [[ "${{ steps.tag_name.outputs.name }}" == "latest" ]] && DATE_ID="${DATE_ID}-${{ steps.tag_name.outputs.name }}"
-        docker tag "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" "${DOCKER_IMAGE}:${DATE_ID}"
-        docker push "${DOCKER_IMAGE}:${DATE_ID}"
+        if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
+          DATE_ID="$(date +%Y%m%dT%H%M)"
+          [[ "${{ steps.tag_name.outputs.name }}" == "latest" ]] && DATE_ID="${DATE_ID}-${{ steps.tag_name.outputs.name }}"
+          docker tag "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" "${DOCKER_IMAGE}:${DATE_ID}"
+          docker push "${DOCKER_IMAGE}:${DATE_ID}"
+        fi
         docker push "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}"
