@@ -49,9 +49,9 @@ jobs:
       run: |
         rm -rf .git .github
         EP="${{ github.event.inputs.extra_pkgs }}"
-        [[ -n "$EP" ]] && EP="--build-arg 'EXTRA_PACKAGES=$EP'"
+        [[ -n "$EP" ]] && EP="-"
         docker pull "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" && CACHE_LINE="--cache-from '${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}'" || CACHE_LINE=""
-        jupyter-repo2docker $CACHE_LINE $EP --debug --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
+        jupyter-repo2docker $CACHE_LINE --debug --build-arg EXTRA_PACKAGES="$EP" --user-name jovyan --user-id 1000 --no-run --image-name "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" . || exit -1
     - name: Test r2d Image
       run: |
         docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
