@@ -1,5 +1,5 @@
 ARG OGGM_TAG=20230310
-ARG BASE_TAG=latest
+ARG BASE_TAG=20230305
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
