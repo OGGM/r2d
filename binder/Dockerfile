@@ -1,4 +1,4 @@
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=20230310
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
