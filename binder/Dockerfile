@@ -46,6 +46,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         parambokeh \
         seaborn \
         tables \
+        h5netcdf \
         git+https://github.com/OGGM/oggm-edu.git 
 
 # Problematic dependencies
