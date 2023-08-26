@@ -37,6 +37,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         pyct && \
     ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
         scikit-learn \
+        pyviz_comms \
         ipympl && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         nbgitpuller \
@@ -45,7 +46,6 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         bokeh \
         param \
         shapely \
-        pyviz_comms \
         parambokeh \
         seaborn \
         tables \
