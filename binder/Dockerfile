@@ -28,17 +28,16 @@ RUN ${PIP} install --no-cache-dir \
         jupyterlab \
         jupyterhub \
         nbconvert \
-        notebook \
+        nbclassic \
+        "notebook<7" \
         nteract_on_jupyter
 
 # OGGM(-Hub) requirements
 RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         pyct && \
-    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn,nbclassic,notebook \
+    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
         scikit-learn \
-        ipympl \
-        "notebook<7" \
-        nbclassic && \
+        ipympl && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         nbgitpuller \
         nbserverproxy \
