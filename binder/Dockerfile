@@ -55,7 +55,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
-    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments,contourpy \
         tqdm \
         panel && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
