@@ -29,7 +29,7 @@ RUN ${PIP} install --no-cache-dir \
         jupyterhub \
         nbconvert \
         nbclassic \
-        "notebook<7" \
+        notebook \
         nteract_on_jupyter
 
 # OGGM(-Hub) requirements
@@ -37,9 +37,8 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         pyct && \
     ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
         scikit-learn \
-        pyviz_comms \
         ipympl && \
-    ${PIP} install --no-cache-dir --no-binary :all: \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
         nbgitpuller \
         nbserverproxy \
         graphviz \
@@ -50,6 +49,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         seaborn \
         tables \
         h5netcdf \
+        pyviz_comms \
         git+https://github.com/OGGM/oggm-edu.git 
 
 # Problematic dependencies
