@@ -4,7 +4,7 @@ ARG OGGM_TAG=latest
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
         build-essential gcc g++ gfortran rustc cargo cmake ninja-build autoconf automake libtool \
@@ -85,7 +85,7 @@ ARG CPU_LIMIT=2
 ARG NB_USER=jovyan
 ARG NB_UID=1100
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
         nodejs wget curl libopenblas0 liblapack3 && \
