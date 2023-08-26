@@ -34,9 +34,10 @@ RUN ${PIP} install --no-cache-dir \
 # OGGM(-Hub) requirements
 RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         pyct && \
-    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
+    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn,nbclassic \
         scikit-learn \
-        ipympl && \
+        ipympl \
+        nbclassic && \
     ${PIP} install --no-cache-dir --no-binary :all: \
         nbgitpuller \
         nbserverproxy \
