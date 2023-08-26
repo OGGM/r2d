@@ -55,7 +55,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
-    ${PIP} install --no-cache-dir --no-binary :all: \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
         tqdm \
         panel && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
@@ -73,7 +73,7 @@ RUN ${PIP} install --no-cache-dir \
 
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
-    ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments ${EXTRA_PACKAGES}
 
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/empty_base:${BASE_TAG}
