@@ -7,7 +7,7 @@ FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
-        build-essential gcc g++ gfortran rustc cargo \
+        build-essential gcc g++ gfortran rustc cargo cmake ninja-build \
         libffi-dev libssl-dev libopenblas-dev liblapack-dev zlib1g-dev \
         libtiff-dev libpng-dev libjpeg-dev libopenjp2-7-dev libfreetype6-dev \
         libgif-dev libnetcdf-dev libhdf4-dev libhdf5-dev libwebp-dev \
@@ -55,7 +55,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
-    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments,contourpy \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
         tqdm \
         panel && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
