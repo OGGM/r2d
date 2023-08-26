@@ -7,7 +7,7 @@ FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
-        build-essential gcc g++ gfortran rustc cargo cmake ninja-build \
+        build-essential gcc g++ gfortran rustc cargo cmake ninja-build autoconf automake libtool \
         libffi-dev libssl-dev libopenblas-dev liblapack-dev zlib1g-dev \
         libtiff-dev libpng-dev libjpeg-dev libopenjp2-7-dev libfreetype6-dev \
         libgif-dev libnetcdf-dev libhdf4-dev libhdf5-dev libwebp-dev \
