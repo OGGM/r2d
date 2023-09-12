@@ -57,7 +57,7 @@ jobs:
         docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs salem || exit -1
         docker run -u 0 --rm --entrypoint /bin/bash "${DOCKER_IMAGE}:${{ steps.tag_name.outputs.name }}" pytest --pyargs oggm || exit -1
     - name: Login to Dockerhub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
