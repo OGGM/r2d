@@ -4,10 +4,10 @@ ARG OGGM_TAG=latest
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
-        build-essential gcc g++ gfortran rustc cargo \
+        build-essential gcc g++ gfortran rustc cargo cmake ninja-build autoconf automake libtool \
         libffi-dev libssl-dev libopenblas-dev liblapack-dev zlib1g-dev \
         libtiff-dev libpng-dev libjpeg-dev libopenjp2-7-dev libfreetype6-dev \
         libgif-dev libnetcdf-dev libhdf4-dev libhdf5-dev libwebp-dev \
@@ -28,6 +28,7 @@ RUN ${PIP} install --no-cache-dir \
         jupyterlab \
         jupyterhub \
         nbconvert \
+        nbclassic \
         notebook \
         nteract_on_jupyter
 
@@ -37,23 +38,24 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
     ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
         scikit-learn \
         ipympl && \
-    ${PIP} install --no-cache-dir --no-binary :all: \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
         nbgitpuller \
         nbserverproxy \
         graphviz \
         bokeh \
         param \
         shapely \
-        pyviz_comms \
         parambokeh \
         seaborn \
         tables \
+        h5netcdf \
+        pyviz_comms \
         git+https://github.com/OGGM/oggm-edu.git 
 
 # Problematic dependencies
 RUN ${PIP} install --no-cache-dir --force-reinstall \
         typing_extensions && \
-    ${PIP} install --no-cache-dir --no-binary :all: \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
         tqdm \
         panel && \
     ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
@@ -71,7 +73,7 @@ RUN ${PIP} install --no-cache-dir \
 
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
-    ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments ${EXTRA_PACKAGES}
 
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/empty_base:${BASE_TAG}
@@ -83,7 +85,7 @@ ARG CPU_LIMIT=2
 ARG NB_USER=jovyan
 ARG NB_UID=1100
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
         nodejs wget curl libopenblas0 liblapack3 && \
