@@ -33,9 +33,7 @@ RUN ${PIP} install --no-cache-dir \
         nteract_on_jupyter
 
 # OGGM(-Hub) requirements
-RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
-        pyct && \
-    ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
+RUN ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
         scikit-learn \
         ipympl && \
     ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
@@ -44,6 +42,7 @@ RUN ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         graphviz \
         bokeh \
         param \
+        pyct \
         shapely \
         parambokeh \
         seaborn \
