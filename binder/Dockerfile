@@ -33,7 +33,7 @@ RUN ${PIP} install --no-cache-dir \
         nteract_on_jupyter
 
 # OGGM(-Hub) requirements
-RUN ${PIP} install --no-cache-dir --no-binary ipympl,scikit-learn \
+RUN ${PIP} install --no-cache-dir --no-binary scikit-learn \
         scikit-learn \
         ipympl && \
     ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
