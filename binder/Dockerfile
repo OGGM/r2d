@@ -4,7 +4,7 @@ ARG OGGM_TAG=latest
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
         build-essential gcc g++ gfortran cmake ninja-build autoconf automake libtool \
@@ -20,9 +20,8 @@ ENV CARGO_HOME="/opt/cargo" RUSTUP_HOME="/opt/rustup" PATH="/opt/cargo/bin:${PAT
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path && \
     rm -rf "${CARGO_HOME}"/registry "${CARGO_HOME}"/git
 
-# Temporary workaround, since it requires tornado>=6.2 now, colliding with distributed wanting <6.2.
-# Remove once distributed supports up-to-date tornado
-RUN ${PIP} install --no-cache-dir "jupyter-client<7.3.5"
+# Update pip
+RUN ${PIP} install --upgrade --no-cache-dir pip setuptools wheel build
 
 # repo2docker requirements
 RUN ${PIP} install --no-cache-dir \
@@ -53,19 +52,14 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         tables \
         h5netcdf \
         pyviz_comms \
-        git+https://github.com/OGGM/oggm-edu.git 
-
-# Problematic dependencies
-RUN ${PIP} install --no-cache-dir --force-reinstall \
-        typing_extensions && \
-    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments \
-        tqdm \
-        panel && \
-    ${PIP} install --no-cache-dir --no-binary :all: --no-build-isolation \
         holoviews \
         hvplot \
         geoviews \
-        datashader
+        datashader \
+        typing_extensions \
+        tqdm \
+        panel \
+        git+https://github.com/OGGM/oggm-edu.git
 
 # Lab extensions
 RUN ${PIP} install --no-cache-dir \
@@ -88,7 +82,7 @@ ARG CPU_LIMIT=2
 ARG NB_USER=jovyan
 ARG NB_UID=1100
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
         nodejs wget curl libopenblas0 liblapack3 && \
