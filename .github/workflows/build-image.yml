@@ -34,6 +34,8 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
+    - name: Setup Buildx
+      uses: docker/setup-buildx-action@v3
     - name: Get Image Tag
       id: tag_name
       run: |
