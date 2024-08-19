@@ -7,7 +7,7 @@ FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install wget curl nodejs \
-        build-essential gcc g++ gfortran rustc cargo cmake ninja-build autoconf automake libtool \
+        build-essential gcc g++ gfortran cmake ninja-build autoconf automake libtool \
         libffi-dev libssl-dev libopenblas-dev liblapack-dev zlib1g-dev \
         libtiff-dev libpng-dev libjpeg-dev libopenjp2-7-dev libfreetype6-dev \
         libgif-dev libnetcdf-dev libhdf4-dev libhdf5-dev libwebp-dev \
@@ -15,6 +15,10 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get clean && \
     npm install --global yarn && \
     ln -s bash /bin/sh.bash && mv /bin/sh.bash /bin/sh
+
+ENV CARGO_HOME="/opt/cargo" RUSTUP_HOME="/opt/rustup" PATH="/opt/cargo/bin:${PATH}"
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path && \
+    rm -rf "${CARGO_HOME}"/registry "${CARGO_HOME}"/git
 
 # Temporary workaround, since it requires tornado>=6.2 now, colliding with distributed wanting <6.2.
 # Remove once distributed supports up-to-date tornado
