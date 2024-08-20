@@ -82,6 +82,8 @@ ARG CPU_LIMIT=2
 ARG NB_USER=jovyan
 ARG NB_UID=1100
 
+ARG STATIC_MAP_API_KEY=
+
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -90,7 +92,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     rm -rf /var/lib/apt/lists/* && \
     ln -s bash /bin/sh.bash && mv /bin/sh.bash /bin/sh
 
-ENV PYTHONUNBUFFERED=1 USER=${NB_USER} HOME=/home/${NB_USER} REPO_DIR=/home/${NB_USER} PATH=/home/${NB_USER}/.local/bin:${PATH}
+ENV PYTHONUNBUFFERED=1 USER=${NB_USER} HOME=/home/${NB_USER} REPO_DIR=/home/${NB_USER} PATH=/home/${NB_USER}/.local/bin:${PATH} STATIC_MAP_API_KEY=${STATIC_MAP_API_KEY}
 RUN groupadd --gid ${NB_UID} ${NB_USER} && \
     useradd \
         --comment "Default user" \
