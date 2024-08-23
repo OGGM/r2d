@@ -40,7 +40,7 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         scikit-learn \
         pyct \
         ipympl && \
-    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments,tensorflow,tensorflow-io-gcs-filesystem \
+    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments,tensorflow,tensorflow-io-gcs-filesystem,tensorboard \
         nbgitpuller \
         nbserverproxy \
         graphviz \
