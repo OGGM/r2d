@@ -71,7 +71,7 @@ RUN ${PIP} install --no-cache-dir \
 
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
-    ${PIP} install --no-cache-dir --no-binary :all: --only-binary jupyterlab-pygments ${EXTRA_PACKAGES}
+    ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
 
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/empty_base:${BASE_TAG}
