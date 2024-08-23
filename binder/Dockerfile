@@ -59,6 +59,7 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         typing_extensions \
         tqdm \
         panel \
+        nc-time-axis \
         git+https://github.com/OGGM/oggm-edu.git
 
 # Lab extensions
