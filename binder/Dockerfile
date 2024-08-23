@@ -59,7 +59,11 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         typing_extensions \
         tqdm \
         panel \
-        git+https://github.com/OGGM/oggm-edu.git
+        pyyaml \
+        importlib_resources \
+        tensorflow[and-cuda]==2.15.1 \
+        git+https://github.com/OGGM/oggm-edu.git \
+        git+https://github.com/jouvetg/igm.git
 
 # Lab extensions
 RUN ${PIP} install --no-cache-dir \
