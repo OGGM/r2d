@@ -1,5 +1,5 @@
 # You can pick a tag from: https://github.com/OGGM/oggm/pkgs/container/oggm
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=41162d945a69ea98a88ad3973c0b510336e156c6
 # Here the date should be same or lower than above. Link: https://github.com/OGGM/OGGM-Docker/pkgs/container/empty_base
 ARG BASE_TAG=latest
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
