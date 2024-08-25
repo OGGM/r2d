@@ -73,10 +73,10 @@ ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
 
-ARG BASE_TAG=latest
+ARG BASE_TAG=20240825
 FROM ghcr.io/oggm/empty_base:${BASE_TAG}
 
-ARG BASE_TAG=latest
+ARG BASE_TAG=20240825
 ARG MEM_LIMIT=2G
 ARG CPU_LIMIT=2
 
