@@ -69,6 +69,9 @@ RUN ${PIP} install --no-cache-dir \
         jupyterlab-widgets \
         dask-labextension
 
+# DTCG requirements
+RUN ${PIP} install --no-cache-dir --no-binary --no-deps git+https://github.com/DTC-Glaciers/dtcg
+
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
