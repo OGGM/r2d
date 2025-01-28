@@ -60,7 +60,8 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         tqdm \
         panel \
         nc-time-axis \
-        git+https://github.com/OGGM/oggm-edu.git
+        git+https://github.com/OGGM/oggm-edu.git \
+        git+https://github.com/DTC-Glaciers/dtcg
 
 # Lab extensions
 RUN ${PIP} install --no-cache-dir \
@@ -68,9 +69,6 @@ RUN ${PIP} install --no-cache-dir \
         nbgitpuller \
         jupyterlab-widgets \
         dask-labextension
-
-# DTCG requirements
-RUN ${PIP} install --no-cache-dir --no-binary --no-deps git+https://github.com/DTC-Glaciers/dtcg
 
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
