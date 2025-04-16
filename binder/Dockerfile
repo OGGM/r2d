@@ -67,6 +67,7 @@ RUN ${PIP} install --no-cache-dir \
         jupyter-server-proxy \
         nbgitpuller \
         jupyterlab-widgets \
+        jupyterlab-myst \
         dask-labextension
 
 ARG EXTRA_PACKAGES=-
