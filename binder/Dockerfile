@@ -70,6 +70,9 @@ RUN ${PIP} install --no-cache-dir \
         jupyterlab-myst \
         dask-labextension
 
+# DTCG requirements
+RUN ${PIP} install --no-cache-dir --no-deps --no-binary :all: git+https://github.com/DTC-Glaciers/dtcg.git
+
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
