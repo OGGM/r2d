@@ -71,7 +71,8 @@ RUN ${PIP} install --no-cache-dir \
         dask-labextension
 
 # DTCG requirements
-RUN ${PIP} install --no-cache-dir --no-binary :all: git+https://github.com/DTC-Glaciers/dtcg.git
+RUN ${PIP} install --no-cache-dir --no-binary :all: \
+    git+https://github.com/DTC-Glaciers/dtcg.git@v1.1.3
 
 ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
