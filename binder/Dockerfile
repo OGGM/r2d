@@ -36,11 +36,12 @@ RUN ${PIP} install --no-cache-dir \
         nteract_on_jupyter
 
 # OGGM(-Hub) requirements
-RUN ${PIP} install --no-cache-dir scikit-learn,pyct \
+RUN ${PIP} install --no-cache-dir \
         scikit-learn \
         pyct \
         ipympl && \
-    ${PIP} install --no-cache-dir jupyterlab-pygments \
+    ${PIP} install --no-cache-dir \
+        jupyterlab-pygments \
         nbgitpuller \
         nbserverproxy \
         graphviz \
