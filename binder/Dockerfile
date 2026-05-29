@@ -1,7 +1,7 @@
 # You can pick a tag from: https://github.com/OGGM/oggm/pkgs/container/oggm
-ARG OGGM_TAG=latest
+ARG OGGM_TAG=1.6.3
 # Here the date should be same or lower than above. Link: https://github.com/OGGM/OGGM-Docker/pkgs/container/empty_base
-ARG BASE_TAG=latest
+ARG BASE_TAG=20260412
 FROM ghcr.io/oggm/oggm:${OGGM_TAG} as builder
 
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
@@ -74,10 +74,10 @@ ARG EXTRA_PACKAGES=-
 RUN [ "${EXTRA_PACKAGES}" = "-" ] || \
     ${PIP} install --no-cache-dir --no-binary :all: ${EXTRA_PACKAGES}
 
-ARG BASE_TAG=latest
+ARG BASE_TAG=20260412
 FROM ghcr.io/oggm/empty_base:${BASE_TAG}
 
-ARG BASE_TAG=latest
+ARG BASE_TAG=20260412
 ARG MEM_LIMIT=2G
 ARG CPU_LIMIT=2
 
