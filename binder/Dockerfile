@@ -47,7 +47,6 @@ RUN ${PIP} install --no-cache-dir --no-binary scikit-learn,pyct \
         bokeh \
         param \
         shapely \
-        parambokeh \
         seaborn \
         tables \
         h5netcdf \
